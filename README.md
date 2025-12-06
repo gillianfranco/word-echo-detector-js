@@ -1,1 +1,1 @@
-# word-echo-detector-js
+# Word Echo Detector
