@@ -1,3 +1,51 @@
+const fs = require("fs");
 const filePath = process.argv[2];
 
-console.log(filePath);
+fs.readFile(filePath, "utf8", (err, data) => {
+  console.log(countWordsPerParagraph(data));
+});
+
+function countWordsPerParagraph(text) {
+  const paragraphs = splitParagraphs(text);
+  const wordCount = paragraphs.flatMap((p) => {
+    if (!p) return [];
+    return countWords(p);
+  });
+
+  const normalizedWordCount = [];
+
+  for (const paragraph of wordCount) {
+    for (const [word, repetitions] of Object.entries(paragraph)) {
+      if (repetitions == 1) continue;
+      const keyValue = {};
+      keyValue[word] = repetitions;
+      normalizedWordCount.push(keyValue);
+    }
+  }
+
+  return normalizedWordCount;
+}
+
+function countWords(text) {
+  const wordsList = text.split(" ");
+  const result = {};
+
+  wordsList.forEach((word) => {
+    const sanitizedWord = sanitizeWord(word);
+    if (word.length >= 3) {
+      result[sanitizedWord] = (result[sanitizedWord] || 0) + 1;
+    }
+  });
+
+  return result;
+}
+
+function splitParagraphs(text) {
+  const paragraphsList = text.toLowerCase().split("\n");
+
+  return paragraphsList;
+}
+
+function sanitizeWord(word) {
+  return word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
+}
