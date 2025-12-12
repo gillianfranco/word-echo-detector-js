@@ -1,17 +1,4 @@
-const fs = require("fs");
-const errorFunctions = require("./errors/errorFunctions");
-const filePath = process.argv[2];
-
-fs.readFile(filePath, "utf8", (err, data) => {
-  try {
-    if (err) throw err;
-    console.log(countWordsPerParagraph(data));
-  } catch (err) {
-    console.log(errorFunctions.errorHandling(err));
-  }
-});
-
-function countWordsPerParagraph(text) {
+export function countWordsPerParagraph(text) {
   const paragraphs = splitParagraphs(text);
   const wordCount = paragraphs.flatMap((p) => {
     if (!p) return [];
