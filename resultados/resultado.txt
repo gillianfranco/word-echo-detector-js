@@ -1,1 +1,93 @@
-[{"que":4},{"você":2},{"uma":2},{"nova":2},{"mercado":3},{"seja":2},{"com":2},{"para":2},{"sua":2},{"essa":2},{"torna":2},{"que":2},{"ansiedade":2},{"que":2},{"uma":2},{"com":2},{"que":2},{"qual":2},{"para":2},{"mundo":2},{"aprendizagem":2},{"estudo":2},{"que":2},{"dia":2},{"que":2},{"com":2},{"aprendizado":2},{"mais":2},{"com":3},{"contorno":2},{"branco":2},{"neon":2},{"que":2},{"torne":2},{"aprendizagem":2},{"vai":2},{"além":2},{"uma":2},{"que":4},{"seu":2},{"conteúdos":3},{"atualizados":2},{"para":2},{"com":3},{"acesso":2},{"sua":2},{"você":2},{"teoria":2},{"representa":3},{"aprendizado":2},{"que":2},{"uma":2},{"mundo":3}]
+Parágrafo 2:
+- que
+- você
+- uma
+- nova
+- mercado
+- seja
+- com
+- para
+- sua
+- essa
+
+Parágrafo 4:
+- torna
+
+Parágrafo 8:
+- que
+
+Parágrafo 10:
+- ansiedade
+- que
+- uma
+
+Parágrafo 12:
+- com
+
+Parágrafo 14:
+- que
+- qual
+- para
+
+Parágrafo 15:
+- mundo
+
+Parágrafo 17:
+- aprendizagem
+- estudo
+
+Parágrafo 19:
+- que
+- dia
+
+Parágrafo 23:
+- que
+
+Parágrafo 25:
+- com
+
+Parágrafo 31:
+- aprendizado
+- mais
+
+Parágrafo 32:
+- com
+- contorno
+- branco
+- neon
+
+Parágrafo 34:
+- que
+
+Parágrafo 38:
+- torne
+
+Parágrafo 40:
+- aprendizagem
+
+Parágrafo 44:
+- vai
+- além
+
+Parágrafo 46:
+- uma
+- que
+- seu
+- conteúdos
+- atualizados
+- para
+- com
+- acesso
+- sua
+- você
+
+Parágrafo 48:
+- teoria
+- representa
+- aprendizado
+- que
+
+Parágrafo 50:
+- uma
+- mundo
+

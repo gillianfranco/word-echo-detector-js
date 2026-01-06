@@ -1,6 +1,7 @@
 import fs from 'fs';
 import errorHandling from './errors/errorFunctions.js';
 import { countWordsPerParagraph } from './index.js';
+import { buildOutput } from "./helpers.js";
 
 const filePath = process.argv[2];
 const path = process.argv[3];
@@ -50,7 +51,7 @@ fs.readFile(filePath, "utf8", (err, data) => {
 function createFile(path, data) {
   const newFilePath = `${path}/resultado.txt`;
 
-  fs.promises.writeFile(newFilePath, JSON.stringify(data))
+  fs.promises.writeFile(newFilePath, buildOutput(data))
     .then(() => console.log("Arquivo criado com sucesso!"))
     .catch((err) => console.log(errorHandling(err)))
     .finally(() => console.log("Operação finalizada."));
@@ -58,16 +59,16 @@ function createFile(path, data) {
 
 // Lendo múltiplos arquivos simultaneamente de forma assíncrona:
 
-async function readMultipleFiles(arrayPaths) {
-  try {
-    const promisesArray = arrayPaths.map((path) => {
-      return fs.promises.readFile(path, "utf8");
-    });
-    const dataList = await Promise.all(promisesArray);
-    return dataList;
-  } catch (error) {
-    throw error;
-  }
-}
+// async function readMultipleFiles(arrayPaths) {
+//   try {
+//     const promisesArray = arrayPaths.map((path) => {
+//       return fs.promises.readFile(path, "utf8");
+//     });
+//     const dataList = await Promise.all(promisesArray);
+//     return dataList;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
 
 // console.log(await readMultipleFiles(["./arquivos/texto-aprendizado.txt", "./arquivos/texto-kanban.txt", "./arquivos/texto-web.txt"]));
