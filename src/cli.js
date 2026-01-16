@@ -1,24 +1,50 @@
 import fs from 'fs';
+import path from 'node:path';
 import errorHandling from './errors/errorFunctions.js';
 import { countWordsPerParagraph } from './index.js';
 import { buildOutput } from "./helpers.js";
+import { program } from "commander";
 
-const filePath = process.argv[2];
-const path = process.argv[3];
+program
+  .version('0.1.0')
+  .option('-t, --text <string>', 'caminho do texto a ser processado')
+  .option('-d, --destination <string>', 'caminho da pasta para salvar o arquivo de resultado')
+  .action((options) => {
+    const { text, destination } = options;
 
-fs.readFile(filePath, "utf8", (err, data) => {
-  try {
-    if (err) throw err;
-    const resultado = countWordsPerParagraph(data);
-    createFile(path, resultado);
-  } catch (err) {
-    console.log(errorHandling(err));
-  }
-});
+    if (!text || !destination) {
+      console.error("Error: por favor, insira o caminho do arquivo de texto e o caminho da pasta de destino para salvar o resultado");
+      program.help();
+      return;
+    }
 
-// --- Forma síncrona e assíncrona da função createFile() ---
+    const textPath = path.resolve(text);
+    const destinationPath = path.resolve(destination);
 
-// Forma síncrona:
+    try {
+      processText(textPath, destinationPath);
+      console.log("Texto processado com sucesso!");
+    } catch (error) {
+      console.log("Ocorreu um erro no processamento\n", error);
+    }
+
+  });
+
+program.parse();
+
+function processText(text, destination) {
+  fs.readFile(text, "utf8", (err, data) => {
+    try {
+      if (err) throw err;
+      const resultado = countWordsPerParagraph(data);
+      createFile(destination, resultado);
+    } catch (err) {
+      console.log(errorHandling(err));
+    }
+  });
+}
+
+// Forma assíncrona também (mas usando callback):
 
 // function createFile(path, data) {
 //   const newFilePath = `${path}/resultado.txt`;
@@ -35,27 +61,26 @@ fs.readFile(filePath, "utf8", (err, data) => {
 
 // Usando async/await:
 
-// async function createFile(path, data) {
-//   const newFilePath = `${path}/resultado.txt`;
+async function createFile(path, data) {
+  const newFilePath = `${path}/resultado.txt`;
 
-//   try {
-//     await fs.promises.writeFile(newFilePath, JSON.stringify(data));
-//     console.log("Arquivo criado com sucesso!");
-//   } catch (err) {
-//     console.log(errorHandling(err));
-//   }
-// }
+  try {
+    await fs.promises.writeFile(newFilePath, buildOutput(data));
+  } catch (err) {
+    console.log(errorHandling(err));
+  }
+}
 
 // Usando then:
 
-function createFile(path, data) {
-  const newFilePath = `${path}/resultado.txt`;
+// function createFile(path, data) {
+//   const newFilePath = `${path}/resultado.txt`;
 
-  fs.promises.writeFile(newFilePath, buildOutput(data))
-    .then(() => console.log("Arquivo criado com sucesso!"))
-    .catch((err) => console.log(errorHandling(err)))
-    .finally(() => console.log("Operação finalizada."));
-}
+//   fs.promises.writeFile(newFilePath, buildOutput(data))
+//     .then(() => console.log("Arquivo criado com sucesso!"))
+//     .catch((err) => console.log(errorHandling(err)))
+//     .finally(() => console.log("Operação finalizada."));
+// }
 
 // Lendo múltiplos arquivos simultaneamente de forma assíncrona:
 

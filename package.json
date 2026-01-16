@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/gillianfranco/word-echo-detector-js/issues"
   },
-  "homepage": "https://github.com/gillianfranco/word-echo-detector-js#readme"
+  "homepage": "https://github.com/gillianfranco/word-echo-detector-js#readme",
+  "dependencies": {
+    "commander": "^14.0.2"
+  }
 }
